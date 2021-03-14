@@ -64,5 +64,30 @@ function solve() {
 
 const iteration = solve();
 const solution = x[x.length - 1];
-console.log(solution);
+
+const intermidiateRes = x
+  .map(arr => arr.map(item => item.toFixed(6)))
+  .map((arr, index) => `iteration ${index}: [ ${arr} ]`.split(',').join(', '))
+  .join('\n');
+console.log(intermidiateRes);
+
+let r = [];
+for (let iterator = 1; iterator < 21; iterator++) {
+  r[iterator] = [];
+  for (let i = 0; i < length; i++) {
+    r[iterator][i] = b[i];
+    for (let j = 0; j < length; j++) {
+      r[iterator][i] -= A[i][j] * x[iterator][j];
+    }
+  }
+}
+
+console.log(
+  r
+  .map(arr => arr.map(item => item.toFixed(6)))
+  .map((arr, index) => `r[${index}] = [ ${arr.join(', ')} ]`)
+  .join('\n')  
+);
+
+console.log(solution.map(item => item.toFixed(7)));
 console.log({ iteration });
